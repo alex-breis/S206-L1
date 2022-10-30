@@ -2,7 +2,7 @@
 
 describe("Cenário de teste para o site globalsqa", ()=>{
 
-  it.skip('Caso de teste: Registrando um usuário no site com sucesso', ()=>{
+  it('Caso de teste: Registrando um usuário no site com sucesso', ()=>{
     cy.visit('https://globalsqa.com/angularJs-protractor/registration-login-example/#/login')
     cy.get('.btn-link').click()
     cy.get('#firstName').type("Alex")
@@ -33,6 +33,15 @@ describe("Cenário de teste para o site globalsqa", ()=>{
     cy.get('.btn-primary').click()
     cy.get('h1.ng-binding').should('contain.text',info[0])
 
+  })
+
+  it('Caso de teste: Deletando usuário com sucesso', ()=>{
+    let info = crairUsuario()
+    cy.login(info[0],info[1])
+    cy.get('.ng-binding > a').click()
+    cy.get('.btn').click()
+    cy.login(info[0],info[1])
+    cy.get('.ng-binding').should('have.text', 'Username or password is incorrect')
   })
 
 })
